@@ -1,0 +1,36 @@
+.carousel-item{
+    width: 100%;
+    height: fit-content;
+}
+
+.carousel-item img{
+    /* width: 100%; */
+    position: relative;
+    bottom: 50px;
+    max-height: 100vh;
+}
+
+.logreg{
+    font-weight: bold;
+    text-align: center;
+}
+
+.logform{
+    width:80vw;
+    position: relative;
+    left: 10vw;
+}
+
+@media only screen and (max-width:1000px) {
+    .carousel-item{
+        width: 100%;
+    }
+
+    .carousel-item img{
+        bottom: 0;
+    }
+    
+    .carousel-indicators{
+        top:60%;
+    }
+}
