@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title  %}Home{% endblock  %}</title>
+    {% block link %}{% endblock link %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/home.css">
+    <script src="https://kit.fontawesome.com/08f5394404.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">NETSUM</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/summarizer">Summarizer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/inspection">Inspection</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/uploads">Uploads</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {% block body %}{% endblock body %}
+
+      <footer>
+        <a href="instagram.html" class="ig"> <img src="static/images/instagram.svg" width="20" height="20" > </a>
+        <a href="facebook.html" class="fb"> <img src="static/images/facebook.svg" width="20" height="20"> </a>
+        <a href="linkedin.html" class="li"> <img src="static/images/linkedin.svg" width="20" height="20"> </a>
+        <a href="about.html" class="about"> About </a>   
+      </footer>
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

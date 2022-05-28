@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %}Summarizer{% endblock title %}
+{% block link %}
+<link rel="stylesheet" href="static/styles/summarizer.css">
+{% endblock link %}
+{% block body %}
+<h1 class="text-center" style="margin: 100px;"><em>SIRE 2.0 Summarizer</em></h1>
+<p style="text-align:center">
+  <a class="btn btn-primary mx-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+    aria-controls="collapseExample" data-toggle="tooltip" data-placement="bottom" title="Filter Questions">
+    <img src="static/images/filter2.png" class="filterimg" alt="">
+  </a><span class="filterhead">Filter Categories for Questions</span>
+</p>
+<div class="collapse container-fluid" id="collapseExample">
+  <form method="POST">
+
+    <div class="mb-4">
+      <h6>Question Type</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="Core" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Core
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="Rotational" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Rotational
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="AllQt" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          All
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h6>Conditional</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          TRUE
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          FALSE
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          All
+        </label>
+      </div>
+    </div>
+    <div class="mb-4">
+      <h6>Vessel Type</h6>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Chemical
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        LNG
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        LPG
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Oil
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
+      <label class="form-check-label" for="flexCheckDefault">
+        All
+      </label>
+    </div>
+    <div class="mb-4">
+      <h6>Hardware Response Type</h6>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Binary
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Graduated
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        None
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
+      <label class="form-check-label" for="flexCheckDefault">
+        All
+      </label>
+    </div>
+    <div class="mb-4">
+      <h6>Human Response Type</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gradHR" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Graduated
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="noneHR" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          None
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="allHR" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          All
+        </label>
+      </div>
+    </div>
+    <div class="mb-4">
+      <h6>Process Response Type</h6>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Binary
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Graduated
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        None
+      </label>
+      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
+      <label class="form-check-label" for="flexCheckDefault">
+        All
+      </label>
+    </div>
+    <div class="mb-4">
+      <h6>ROVIQ</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+        <label class="form-check-label" for="defaultCheck1">
+          All 
+        </label>
+      </div>
+      {% for category in var1 %}
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <label class="form-check-label" for="defaultCheck1">
+          {{category}}
+        </label>
+      </div>
+      {% endfor %}
+      
+    </div>
+
+    <button type="submit" class="btn btn-primary filtersub">Apply</button>
+  </form>
+</div>
+<br>
+<br>
+<div class="questions container-fluid">
+  <p>{% if var2 %}{% endif %}</p>
+</div>
+<div class="instructions container-fluid my-2">
+  <p>
+    <h3>Guidelines on how to use the tool</h3>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis culpa, quos voluptate quia aliquid vel excepturi, molestias, harum unde a veritatis tempore nihil ducimus sint rem placeat eveniet? Iste, laboriosam repudiandae saepe exercitationem alias minima excepturi. Adipisci, reiciendis repudiandae tenetur tempore velit delectus earum asperiores veniam dolores expedita, beatae ipsum iusto unde sit. Corporis amet odit illum dolores, aut placeat eius odio expedita repudiandae quis. A tenetur quibusdam recusandae suscipit quae nam amet magnam ipsum corporis reprehenderit, culpa cum eligendi illum nemo, rem reiciendis? Fugit praesentium sed nobis aliquid necessitatibus aut, commodi eligendi ullam est ad, molestiae odio voluptatibus veritatis.
+  </p>
+</div>
+{% endblock body %}
