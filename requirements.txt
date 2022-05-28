@@ -1,4 +1,4 @@
-asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1652752042988/work
+asgiref 
 Django @ file:///D:/bld/django_1649678348434/work
 gunicorn==20.1.0
 sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1631317292236/work
