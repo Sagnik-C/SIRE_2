@@ -15,4 +15,4 @@ def uploads(request):
     return render(request, 'uploads.html')
 
 def inspection(request):
-    return HttpResponse("This is inspection section")
+    return render(request, 'inspection.html')
