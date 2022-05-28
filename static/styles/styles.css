@@ -1,0 +1,42 @@
+html, body {
+    margin-top:10px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    height:100%;
+  }
+.body-web{
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.title-bar{
+    display: flex;
+    width: 92%;
+    margin-top: 5%;
+    border-bottom: 3px solid #212529;
+    position: relative;
+    left:4%;
+}
+.type-selector{
+    display: flex;
+    position: relative;
+    width: 92%;
+    left:4%;
+    margin-top: 5%;
+    vertical-align: top;
+}
+
+.title-text{
+    font-size: 18px;
+    color: #212529;
+    margin:0;
+    padding:3px 9px;
+}
+.form-select{
+    padding: 6px 9px;
+    max-width: 45%;
+    margin-left: 10%;
+}

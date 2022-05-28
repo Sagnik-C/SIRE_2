@@ -1,0 +1,31 @@
+
+.indi-bar{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.5%;
+    margin-left: 5%;
+    margin-right: 6%;
+    border-radius: 4px;
+    border-bottom: 1px solid #212529;
+}
+.indi-bar-matrix{
+    display: flex;
+    position: relative;
+    width: 92%;
+    left:4%;
+    margin-top: 3%;     
+    flex-direction: column;
+}
+.bar-sn{
+    display: flex;
+    width: 150px;
+    padding-left: 20px;
+}
+.bar-info{
+    display: flex;
+    flex: 1;
+    padding-left: 50px;
+}
+.text-bar{
+    margin: 6px 5px;
+}

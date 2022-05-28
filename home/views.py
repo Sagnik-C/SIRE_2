@@ -12,7 +12,7 @@ def summarizer(request):
     return render(request, 'summarizer.html', context)
 
 def uploads(request):
-    return HttpResponse("This is uploads section")
+    return render(request, 'uploads.html')
 
 def inspection(request):
     return HttpResponse("This is inspection section")
