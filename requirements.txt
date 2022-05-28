@@ -1,5 +1,7 @@
 asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1652752042988/work
 Django @ file:///D:/bld/django_1649678348434/work
+gunicorn==20.1.0
 sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1631317292236/work
 typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1650370875435/work
 tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1647621564023/work
+whitenoise==6.1.0
