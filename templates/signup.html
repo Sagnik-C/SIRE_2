@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block title %} <title>Sign Up</title>{% endblock title %}
+{% block links %} 
+    <link rel="stylesheet" href="static/styles/signup.css"> 
+    <script src="static/scripts/reghandle.js"></script>
+    {% endblock links %}
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="login-div">
+        
+        <form class="login" action="/handlesignup" method="POST" name="regform" onsubmit="event.preventDefault(); validatelogin();">
+            {% csrf_token %}
+            <h1 styl="text-align: center;"> &ensp; S&nbsp;H&nbsp;I&nbsp;P&nbsp; A&nbsp;U&nbsp;D&nbsp;I&nbsp;T&nbsp;</h1>
+            <h1 style="text-align: center;"> Sign Up Here</h1>
+            <div class="input-text">
+                <label for="username">Choose a Username</label>
+                <input type="text" id="inputid" name="username" placeholder="Username" />
+            </div>
+            <div class="input-text">
+                <label for="fname">Enter your First name</label>
+                <input type="text" id="inputid" name="fname" placeholder="Ex: John" />
+            </div>
+            <div class="input-text">
+                <label for="lname">Enter your last name</label>
+                <input type="text" id="inputid" name="lname" placeholder="Ex: Doe" />
+            </div>
+            <div class="input-text">
+                <label for="email">Enter your email</label>
+                <input type="email" id="inputid" name="email" placeholder="Ex: ___@gmail.com" />
+            </div>
+            <div class="input-text">
+                <label for="pass1">Choose your password</label>
+                <input type="password" id="inputPassword" name="pass1" placeholder="Password" />
+            </div>
+            <div class="input-text">
+                <label for="pass2">Confirm password</label>
+                <input type="password" id="inputPassword" name="pass2" placeholder="Password" />
+            </div>
+            
+            <div>
+                <button class="login-button" type="submit">Sign Up</button>
+            </div>
+        </div>
+        </form>
+        <div style="width: 100%; text-align: center;">
+            <a href="/"><button class="login-button" style="width: 150px; border-radius: 50px;" title="Back to Login">&#8592; Login</button></a>
+        </div>
+        
+{% endblock body %}

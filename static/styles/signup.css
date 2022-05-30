@@ -1,0 +1,10 @@
+label{
+    color: white;
+}
+footer{
+    position: relative;
+    top:10vh;
+}
+body{
+    height: fit-content;
+}
