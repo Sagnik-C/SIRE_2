@@ -1,18 +1,54 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/landing_page.css">
+    <script src="https://kit.fontawesome.com/08f5394404.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home">NETSUM</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            
+              <li class="nav-item">
+                <a href="/handlelogout"><button type="button" class="btn btn-success">Log Out</button></a>
+              </li>
+          </div>
+        </div>
+      </nav>
+      <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
 
-{% block title %}Home{% endblock title %}
-{% block link %}{% endblock link %}
-{% block body %}
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="static/images/home_carousel2.webp" class="d-block w-100" alt="...">
+    <div class="container">
+        <div class="card__container">
+            <a href="#" class="card1">
+                <div class="card__content">
+                    <br> <br>  <br>
+                    <p class="card__header">SIRE 2.0</p>
+                </div>
+            </a>
+
+            <a href="#" class="card2">
+                <div class="card__content">
+                    <br> <br>  <br>
+                    <p class="card__header">Gap Analysis</p>
+                </div>
+            </a>
+            
+        </div>
     </div>
-</div>
-<br>
-<h3 class="logreg">Welcome to SIRE 2.0</h3>
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam fugit iure eius facere vel. Quam ut aspernatur quo ipsa, blanditiis suscipit minima sapiente reiciendis commodi maiores asperiores officiis esse aliquid exercitationem eaque perspiciatis obcaecati ab dolorum earum qui sint mollitia eveniet! Alias dolores iusto quis fuga ea minima architecto autem id numquam? Dolore nam harum deleniti earum iure, at consectetur mollitia ipsum vero accusantium fugiat ipsa cumque animi repellendus hic?
-<br>
-<br>
-{% endblock body %}
- 
+    <footer>
+        <a href="instagram.html" class="ig"> <img src="./images/instagram.svg" width="20" height="20" > </a>
+        <a href="facebook.html" class="fb"> <img src="./images/facebook.svg" width="20" height="20"> </a>
+        <a href="linkedin.html" class="li"> <img src="./images/linkedin.svg" width="20" height="20"> </a>
+        <a href="about.html" class="about"> About </a>   
+      </footer>
+  </body>
+</html>

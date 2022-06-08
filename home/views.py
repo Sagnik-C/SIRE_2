@@ -8,6 +8,8 @@ from django.views.decorators.cache import cache_control
 
 # Create your views here.
 
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -20,7 +22,6 @@ def home(request):
 def summarizer(request):
     if 'user' in request.session:
         roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
-
         context = {"var1":roviq_categories}
         return render(request, 'summarizer.html', context)
     else:
@@ -34,7 +35,9 @@ def uploads(request):
 
 def inspection(request):
     if 'user' in request.session:
-        return render(request, 'inspection.html')
+        roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
+        context = {"var1":roviq_categories}
+        return render(request, 'inspection.html', context)
     else:
         return redirect('/ret404')
 
@@ -83,6 +86,9 @@ def handlelogin(request):
 
 def ret404(request):
     return render(request, 'ret404.html')
+
+def gapanalysis(request):
+    return render(request, 'gap_analysis.html')
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):

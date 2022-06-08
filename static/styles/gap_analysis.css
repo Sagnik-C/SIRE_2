@@ -1,0 +1,43 @@
+body{
+    background: url("static/images/l10.jfif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+     -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.textcenter{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size:1cm;
+    color: white;
+}
+.filterhead{
+    font-weight: bold;
+    font-size: 0.6cm;
+    color: black;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: oldlace;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+}
+a.about:link, a.ig:link,a.fb:link,a.li:link{
+    width:50px;
+    height:50px;
+    color:black;
+    font-size:x-large;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+a.about:hover{
+    color:#fff
+}

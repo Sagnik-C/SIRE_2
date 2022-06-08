@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/gap_analysis.css">
+    <script src="https://kit.fontawesome.com/08f5394404.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
+        <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="/home">NETSUM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <li class="nav-item">
+                    <a href="/handlelogout"><button type="button" class="btn btn-success">Log Out</button></a>
+                </li>
+            </div>
+            </div>
+        </nav> 
+        <br> <br> <br> <br> 
+        <h1 class="textcenter" ><em>Gap Analysis</em></h1>
+        
+        <a class="btn btn-primary mx-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample" data-toggle="tooltip" data-placement="bottom" title="Filter Questions">
+            <img src="static/images/filter2.png" class="filterimg" alt="" width="20" height="20">
+        </a><span class="filterhead">Choose VIQ7 questions</span>
+        
+        <div class="collapse container-fluid" id="collapseExample">
+            <form method="POST">
+              {% csrf_token %}
+                <div class="mb-4">
+                    <h6>Question Type</h6>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="Core" id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Core
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="Rotational" id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Rotational
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="AllQt" id="flexRadioDefault2" checked>
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        All
+                      </label>
+                    </div>
+                </div>
+              
+                <div class="mb-4">
+                    <h6>VIQ7 Questions</h6>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                      <label class="form-check-label" for="defaultCheck1">
+                        All 
+                      </label>
+                    </div>
+                </div>
+                </div>
+                    {% for category in var1 %}
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            {{category}}
+                        </label>
+                      </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary filtersub">Apply</button>
+            </form>
+        </div> 
+        <footer>
+            <a href="instagram.html" class="ig"> <img src="static/images/instagram.svg" width="20" height="20" > </a>
+            <a href="facebook.html" class="fb"> <img src="static/images/facebook.svg" width="20" height="20"> </a>
+            <a href="linkedin.html" class="li"> <img src="static/images/linkedin.svg" width="20" height="20"> </a>
+            <a href="about.html" class="about"> About </a>   
+        </footer>
+    </body>
+</html>

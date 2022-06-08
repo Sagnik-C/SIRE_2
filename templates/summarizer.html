@@ -1,175 +1,299 @@
 {% extends 'base.html' %}
-{% block title %}Summarizer{% endblock title %}
+{% block title %}Inspection{% endblock title %}
 {% block link %}
-<link rel="stylesheet" href="static/styles/summarizer.css">
+<link rel="stylesheet" href="static/styles/filter.css">
+<script src="static/scripts/filter.js"></script>
+<link rel="stylesheet" type="text/css" href="static/styles/print.css" media="print">
 {% endblock link %}
 {% block body %}
-<h1 class="text-center" style="margin: 100px;"><em>SIRE 2.0 Summarizer</em></h1>
-<p style="text-align:center">
-  <a class="btn btn-primary mx-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-    aria-controls="collapseExample" data-toggle="tooltip" data-placement="bottom" title="Filter Questions">
-    <img src="static/images/filter2.png" class="filterimg" alt="">
-  </a><span class="filterhead">Filter Categories for Questions</span>
-</p>
-<div class="collapse container-fluid" id="collapseExample">
-  <form method="POST">
 
-    <div class="mb-4">
-      <h6>Question Type</h6>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="Core" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Core
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="Rotational" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Rotational
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="AllQt" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          All
-        </label>
-      </div>
+<div class="wrapper" style="margin-top:50px;">
+    <div class="d-md-flex align-items-md-center">
+        <div class="h3">SIRE 2.0</div>
+        <div class="ml-auto d-flex align-items-center views"> <span class="btn text-success"> <span
+                    class="fas fa-th px-md-2 px-1"></span><span>Grid view</span> </span> <span class="btn"> <span
+                    class="fas fa-list-ul"></span><span class="px-md-2 px-1">List view</span> </span> </div>
     </div>
 
-    <div class="mb-4">
-      <h6>Conditional</h6>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          TRUE
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          FALSE
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          All
-        </label>
+    <div class="d-sm-flex align-items-sm-center pt-2 clear">
+        <div class="text-muted filter-label">Applied Filters:</div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2">Selected Filtre <span
+                class=" px-1 close">&times;</span> </div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Selected Filtre <span
+                class=" px-1 close">&times;</span> </div>
+    </div>
+    <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse"
+            data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span
+                class="px-1 fas fa-filter"></span></button> </div>
+    <div id="mobile-filter">
+        <div class="py-3">
+            <h6 class="font-weight-bold">Qustion Distribution</h6>
+            <ul class="list-group">
+                <li
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                    Core <span class="badge badge-primary badge-pill">328</span> </li>
+                <li
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                    Rotational <span class="badge badge-primary badge-pill">112</span> </li>
+            </ul>
+        </div>
+        <form action="" , method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h6>Question Type</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="core" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Core
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="rotational"
+                        id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Rotational
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="all" id="flexRadioDefault2"
+                        checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        All
+                    </label>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h6>Conditional</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="true" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        True
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="false" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        False
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="all" id="flexRadioDefault2"
+                        checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        All
+                    </label>
+                </div>
+            </div>
+            <div class="py-3">
+                <h6 class="font-weight-bold">Vessel Type</h6>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Chemical <input
+                            name="vessel" value="chemical" type="checkbox"> <span class="check"></span> </label>
+                </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LNG <input
+                            name="vessel" value="lng" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LPG <input
+                            name="vessel" value="lpg" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Oil <input
+                            namw="vessel" value="oil" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">All
+                        <input type="checkbox" name="vessel[]" value="all"> <span class="check"></span> </label>
+                </div>
+            </div>
+            <div class="py-3">
+                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+        </form>
+    </div>
+    <div class="content py-md-0 py-3">
+        <section id="sidebar">
+            <div class="py-3">
+                <h6 class="font-weight-bold">Categories</h6>
+                <ul class="list-group">
+                    <li
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                        Core <span class="badge badge-primary badge-pill">328</span> </li>
+                    <li
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                        Rotational <span class="badge badge-primary badge-pill">112</span> </li>
+                </ul>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <h6>Question Type</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="core" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Core
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="rotational"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Rotational
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="all" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            All
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h6>Conditional</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="true" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            True
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="false" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            False
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="all" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            All
+                        </label>
+                    </div>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Vessel Type</h6>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Chemical <input
+                                name="vessel" value="chemical" type="checkbox"> <span class="check"></span> </label>
+                    </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LNG <input
+                                name="vessel" value="lng" type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LPG <input
+                                name="vessel" value="lpg" type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Oil <input
+                                namw="vessel" value="oil" type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">All
+                            <input type="checkbox" name="vessel[]" value="all"> <span class="check"></span> </label>
+                    </div>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    ROVIQ
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ROVIQ Categories</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-4">
+                <h6>Select required categories to filter</h6>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    All 
+                  </label>
+                </div>
+                {% for category in var1 %}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name= "roviq" value="{{category}}" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    {{category}}
+                  </label>
+                </div>
+                {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #008000;">Done</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
       </div>
     </div>
-    <div class="mb-4">
-      <h6>Vessel Type</h6>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Chemical
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        LNG
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        LPG
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Oil
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
-      <label class="form-check-label" for="flexCheckDefault">
-        All
-      </label>
+  </div></div>
+                <br><br><button type="submit" class="btn btn-primary mt-2">Apply</button>
+            </form>
+        </section> <!-- Products Section -->
+        <section id="products" >
+            <div class="container py-3" id="section-to-print">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+            </div>
+            <button type="button" class="btn btn-secondary ml-2 prnt" style="background-color: #0d6efd;" onclick="window.print()">Print</button> 
+        </section>
     </div>
-    <div class="mb-4">
-      <h6>Hardware Response Type</h6>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Binary
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Graduated
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        None
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
-      <label class="form-check-label" for="flexCheckDefault">
-        All
-      </label>
-    </div>
-    <div class="mb-4">
-      <h6>Human Response Type</h6>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="gradHR" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Graduated
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="noneHR" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          None
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="allHR" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          All
-        </label>
-      </div>
-    </div>
-    <div class="mb-4">
-      <h6>Process Response Type</h6>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Binary
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Graduated
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        None
-      </label>
-      <input class="form-check-input checkmargin" type="checkbox" value="" id="flexCheckDefault" checked>
-      <label class="form-check-label" for="flexCheckDefault">
-        All
-      </label>
-    </div>
-    <div class="mb-4">
-      <h6>ROVIQ</h6>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-        <label class="form-check-label" for="defaultCheck1">
-          All 
-        </label>
-      </div>
-      {% for category in var1 %}
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-          {{category}}
-        </label>
-      </div>
-      {% endfor %}
-      
-    </div>
-
-    <button type="submit" class="btn btn-primary filtersub">Apply</button>
-  </form>
-</div>
-<br>
-<br>
-<div class="questions container-fluid">
-  <p>{% if var2 %}{% endif %}</p>
-</div>
-<div class="instructions container-fluid my-2">
-  <p>
-    <h3>Guidelines on how to use the tool</h3>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis culpa, quos voluptate quia aliquid vel excepturi, molestias, harum unde a veritatis tempore nihil ducimus sint rem placeat eveniet? Iste, laboriosam repudiandae saepe exercitationem alias minima excepturi. Adipisci, reiciendis repudiandae tenetur tempore velit delectus earum asperiores veniam dolores expedita, beatae ipsum iusto unde sit. Corporis amet odit illum dolores, aut placeat eius odio expedita repudiandae quis. A tenetur quibusdam recusandae suscipit quae nam amet magnam ipsum corporis reprehenderit, culpa cum eligendi illum nemo, rem reiciendis? Fugit praesentium sed nobis aliquid necessitatibus aut, commodi eligendi ullam est ad, molestiae odio voluptatibus veritatis.
-  </p>
 </div>
 {% endblock body %}

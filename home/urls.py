@@ -14,4 +14,5 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('handlelogout', views.handlelogout, name='handlelogout'),
     path('ret404', views.ret404, name='ret404'),
+    path('gapanalysis', views.gapanalysis, name='gapanalysis'),
 ]
