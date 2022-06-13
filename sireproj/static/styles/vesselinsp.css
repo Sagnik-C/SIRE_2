@@ -1,0 +1,54 @@
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.containert{
+    width: 95vw;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    top: 100px;
+}
+span a{
+    text-decoration: none !important;
+    color: black !important;
+}
+.container-main{
+    position: relative;
+    min-height: 100vh;
+}
+.infodivs{
+    width: 35vw;
+    height: 35vh;
+    background-color: rgba(255, 255, 255, 0.858);
+    margin: 20px 15px;
+    text-align: center;
+    border-radius: 50px;
+}
+.infospan{
+    position: relative;
+    top: 45%;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer{
+    position: relative;
+    margin-top: auto;
+    top: 50px;
+}
+.infodivs:hover{
+    position: relative;
+    bottom: 5px;
+    box-shadow: rgb(72, 71, 71) 0 20px 15px 0;
+}
+.modal-body{
+    font-size: 15px;
+    font-weight: 500;
+}

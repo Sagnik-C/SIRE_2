@@ -3,11 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    {% block title %}<title>Home</title>{% endblock title %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="static/styles/landing_page.css">
     <script src="https://kit.fontawesome.com/08f5394404.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="#" />
+    <script src="https://kit.fontawesome.com/08f5394404.js" crossorigin="anonymous"></script>
+    {% block links %}{% endblock links %}
   </head>
   <body>
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
@@ -24,11 +26,11 @@
           </div>
         </div>
       </nav>
-      <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+      {% block body %}
 
-    <div class="container">
+    <div class="container cover">
         <div class="card__container">
-            <a href="#" class="card1">
+            <a href="/vesselinsp" class="card1">
                 <div class="card__content">
                     <br> <br>  <br>
                     <p class="card__header">SIRE 2.0</p>
@@ -44,6 +46,7 @@
             
         </div>
     </div>
+    {% endblock body %}
     <footer>
         <a href="instagram.html" class="ig"> <img src="static/images/instagram.svg" width="20" height="20" > </a>
         <a href="facebook.html" class="fb"> <img src="static/images/facebook.svg" width="20" height="20"> </a>

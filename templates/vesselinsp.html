@@ -1,0 +1,91 @@
+{% extends 'indexp.html' %}
+
+{% block title %} <title>Vessel Info</title>{% endblock title %}
+{% block links %} <link rel="stylesheet" href="static/styles/vesselinsp.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% endblock links %}
+
+{% block body %}
+    <div class="container-main">
+        <div class="containert">
+            <div class="hvpq infodivs">
+                <span class="infospan">
+                    Vessel HVPQ Responses <br>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"> + </a>
+                    <!-- //Bootstrap modal -->
+                    <div class="modal" id="myModal1">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal title</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </span> 
+                <!-- //Anchor tag -->
+            </div>
+            <div class="cert infodivs">
+                <span class="infospan">
+                    Vessel Certificates <br>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"> + </a>
+                    <!-- //Bootstrap modal -->
+                    <!-- //Bootstrap modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal title</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                <a href="#">Link 1</a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </span> 
+            </div>
+            <div class="photo infodivs">
+                <span class="infospan">
+                    Vessel Photographs Submitted <br>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"> + </a>
+                    <!-- //Bootstrap modal -->
+                    <div class="modal" id="myModal">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal title</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                
+                            <a href="#">Link 1</a>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </span> 
+            </div>
+        </div>
+    </div>
+{% endblock body %}
