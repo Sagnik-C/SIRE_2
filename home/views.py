@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 import pandas as pd
+from home.models import filter
 
 # Create your views here.
 
@@ -148,55 +149,110 @@ def paginate(df2=None, pageno=1):
 
     return (viq7, sireqn, sireq1, sireq2, sireq3, uids)
 
+def getData(df2, key_dict):
+    qtype = key_dict['qtype']
+    ctype = key_dict['ctype']
+    vessel = key_dict['vessel']
+    hardrestype = key_dict['hardrestype']
+    humanrestype = key_dict['humanrestype']
+    procrestype = key_dict['procrestype']
+    roviqlst = key_dict['roviqlst']
+
+    if qtype=='Core':
+        df2 = df2.loc[df2["Question Type"]=='Core']
+    if qtype=='Rotational':
+        df2 = df2.loc[(df2["Question Type"]=='Rotaional 1') | df2["Question Type"]=='Rotational 2']
+    if ctype=='true':
+        df2 = df2.loc[df2["Conditional"]==True]
+    if ctype=='false':
+        df2 = df2.loc[df2["Conditional"]==False]
+    if len(vessel)!=0:
+        for v in vessel:
+            df2 = df2.loc[df2[v]==True]
+    if hardrestype != "all":
+        df2 = df2.loc[df2["Hardware Response Type"]==hardrestype]
+        
+    if humanrestype != "all":
+        df2 = df2.loc[df2["Human Response Type"]==humanrestype]
+        
+    if procrestype != "all":
+        df2 = df2.loc[df2["Process Response Type"]==procrestype]
+
+    if "all" not in roviqlst and len(roviqlst)!=0:
+        for cat in roviqlst:
+            df2 = df2.loc[df2["Roviq_"+cat]==True]
+
+    return df2
+
 def gapanalysis2(request, pageno):
-    roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
-    
-    df = pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
-    global isset
-    #Handling Filter requests   
+    if 'user' in request.session:
+        roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
 
-    if 'filterbtn' in request.POST:
-        qtype = request.POST['qtype']
-        ctype = request.POST['ctype']
-        vessel = request.POST.getlist('vessel')
-        hardrestype = request.POST['hardrestype']
-        humanrestype = request.POST['humanrestype']
-        procrestype = request.POST['procrestype']
-        roviqlst = request.POST.getlist('roviq')
-        print(qtype, ctype, vessel, hardrestype, humanrestype, procrestype, roviqlst)
-        if qtype=='Core':
-            df = df.loc[df["Question Type"]=='Core']
-        if qtype=='Rotational':
-            df = df.loc[(df["Question Type"]=='Rotaional 1') | df["Question Type"]=='Rotational 2']
-        if ctype=='true':
-            df = df.loc[df["Conditional"]==True]
-        if ctype=='false':
-            df = df.loc[df["Conditional"]==False]
-        if len(vessel)!=0:
-            for v in vessel:
-                df = df.loc[df[v]==True]
-        if hardrestype != "all":
-            df = df.loc[df["Hardware Response Type"]==hardrestype]
-            
-        if humanrestype != "all":
-            df = df.loc[df["Human Response Type"]==humanrestype]
-            
-        if procrestype != "all":
-            df = df.loc[df["Process Response Type"]==procrestype]
+        cuser = filter.objects.filter(username=request.session['user']).first()
+        df=pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
+        if request.method == "GET":
+            if cuser is not None:
+                key_dict=dict()
+                key_dict["qtype"] = cuser.qtype
+                key_dict["ctype"] = cuser.ctype
+                key_dict["vessel"] = cuser.vessel
+                if "all" in key_dict["vessel"]:
+                    key_dict["vessel"]=[]
+                else:
+                    key_dict["vessel"] = (key_dict["vessel"]).split(',')
+                key_dict["hardrestype"] = cuser.hardrestype
+                key_dict["humanrestype"] = cuser.humanrestype
+                key_dict["procrestype"] = cuser.procrestype
+                key_dict["roviqlst"] = cuser.roviqlst
+                if "all" in key_dict["roviqlst"]:
+                    key_dict["roviqlst"] = ["all"]
+                else:
+                    key_dict["roviqlst"] = (cuser.roviqlst).split(',')
+                df = getData(df, key_dict)
+        elif request.method == "POST":
+            #Handling Filter requests   
+            if 'filterbtn' in request.POST:
+                qtype = request.POST['qtype']
+                ctype = request.POST['ctype']
+                vessel = request.POST.getlist('vessel')
+                if len(vessel)!=0:
+                    vessel = ','.join(vessel)
+                else:
+                    vessel="all"
+                hardrestype = request.POST['hardrestype']
+                humanrestype = request.POST['humanrestype']
+                procrestype = request.POST['procrestype']
+                roviqlst = request.POST.getlist('roviq')
+                if len(roviqlst)!=0 and "all" not in roviqlst:
+                        roviqlst  = ','.join(roviqlst)
+                else:
+                    roviqlst="all"
+                if cuser is None:
+                    new_filter = filter(username=request.session['user'],qtype=qtype, ctype=ctype, vessel=vessel, hardrestype=hardrestype, humanrestype=humanrestype, procrestype=procrestype, roviqlst=roviqlst)
+                    new_filter.save()
+                else:
+                    cuser.qtype = qtype
+                    cuser.ctype = ctype
+                    cuser.vessel = vessel
+                    cuser.hardrestype = hardrestype
+                    cuser.humanrestype = humanrestype
+                    cuser.procrestype =   procrestype
+                    cuser.roviqlst = roviqlst
+                    cuser.save()
+        
+        print(len(df))
+        viq7, sireqn, sireq1, sireq2, sireq3, uids = paginate(df ,pageno)
+        
+        context = {"var1":roviq_categories, "viq7qs":viq7, "sireqn":sireqn, "sireq1":sireq1, "sireq2":sireq2, "sireq3":sireq3, "uids":uids}
+        return render(request, 'gapanalysis2.html', context)
 
-        if "all" not in roviqlst and len(roviqlst)!=0:
-            for cat in roviqlst:
-                df = df.loc[df["Roviq_"+cat]==True]
-    
-    viq7, sireqn, sireq1, sireq2, sireq3, uids = paginate(df ,pageno)
-
-    print(len(df))
-    
-    context = {"var1":roviq_categories, "viq7qs":viq7, "sireqn":sireqn, "sireq1":sireq1, "sireq2":sireq2, "sireq3":sireq3, "uids":uids}
-    return render(request, 'gapanalysis2.html', context)
+    else:
+        return redirect('/ret404')
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):
+    fiter_users = filter.objects.filter(username=request.session['user']).first()
+    fiter_users.delete()
     del request.session['user']
     logout(request)        
 

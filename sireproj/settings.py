@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'netsum-sire2.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_globals.middleware.Global',
+    'django_globals.middleware.Global',
 ]
 
 ROOT_URLCONF = 'sireproj.urls'
