@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7$4b=+-^c^(ybfro^-m(f_kq&mzbam%4h63gb01jas+ck7f_mf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'netsum-sire2.herokuapp.com']
 
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django_globals.middleware.Global',
 ]
 
 ROOT_URLCONF = 'sireproj.urls'
@@ -64,6 +65,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'extra_tags': 'home.templatetags.extra_tags',
+            
+            }
         },
     },
 ]

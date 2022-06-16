@@ -1,0 +1,397 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extra_tags %}
+{% block title %}Inspection{% endblock title %}
+{% block link %}
+<link rel="stylesheet" href={%static 'styles/filter.css'%}>
+<!-- <link rel="stylesheet" type="text/css" href="static/styles/print.css" media="print"> -->
+<link rel="stylesheet" href={%static 'styles/gapanalysis2.css'%}>
+<script src={%static "scripts/show.js"%}></script>
+<script src={%static "scripts/filter.js"%}></script>
+<script src={%static "scripts/print.js"%}></script>
+
+{% endblock link %}
+{% block body %}
+<nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">NETSUM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        
+          <li class="nav-item">
+            <a href="/handlelogout"><button type="button" class="btn btn-success">Log Out</button></a>
+          </li>
+      </div>
+    </div>
+  </nav>
+<div class="wrapper cover" style="margin-top:50px;">
+    <div class="d-md-flex align-items-md-center">
+        <div class="h3">Gap Analysis</div>
+        <div class="ml-auto d-flex align-items-center views"> <span class="btn text-success"> <span
+                    class="fas fa-th px-md-2 px-1"></span><span>Grid view</span> </span> <span class="btn"> <span
+                    class="fas fa-list-ul"></span><span class="px-md-2 px-1">List view</span> </span> </div>
+    </div>
+
+    <div class="d-sm-flex align-items-sm-center pt-2 clear">
+        <div class="text-muted filter-label">Applied Filters:</div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2">Selected Filtre <span
+                class=" px-1 close">&times;</span> </div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Selected Filtre <span
+                class=" px-1 close">&times;</span> </div>
+    </div>
+    <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse"
+            data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter" onclick="togglesidebar()">Filter<span
+                class="px-1 fas fa-filter"></span></button> </div>
+    <div id="mobile-filter">
+        <div class="py-3">
+            <h6 class="font-weight-bold">Qustion Distribution</h6>
+            <ul class="list-group">
+                <li
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                    Core <span class="badge badge-primary badge-pill">328</span> </li>
+                <li
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                    Rotational <span class="badge badge-primary badge-pill">112</span> </li>
+            </ul>
+        </div>
+        <form action="" , method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h6>Question Type</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="core" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Core
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="rotational"
+                        id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Rotational
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="qtype" value="all" id="flexRadioDefault2"
+                        checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        All
+                    </label>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h6>Conditional</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="true" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        True
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="false" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        False
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ctype" value="all" id="flexRadioDefault2"
+                        checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        All
+                    </label>
+                </div>
+            </div>
+            <div class="py-3">
+                <h6 class="font-weight-bold">Vessel Type</h6>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Chemical <input
+                            name="vessel" value="chemical" type="checkbox"> <span class="check"></span> </label>
+                </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LNG <input
+                            name="vessel" value="lng" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LPG <input
+                            name="vessel" value="lpg" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Oil <input
+                            name="vessel" value="oil" type="checkbox"> <span class="check"></span> </label> </div>
+                <div class="form-inline d-flex align-items-center py-1"> <label class="tick">All
+                        <input type="checkbox" name="vessel[]" value="all"> <span class="check"></span> </label>
+                </div>
+            </div>
+            <div class="py-3">
+                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
+                        <option selected value="binary">Binary</option>
+                        <option value="graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+        </form>
+    </div>
+    <div class="content py-md-0 py-3">
+        <section id="sidebar">
+            <div class="py-3">
+                <h6 class="font-weight-bold">Categories</h6>
+                <ul class="list-group">
+                    <li
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                        Core <span class="badge badge-primary badge-pill">328</span> </li>
+                    <li
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                        Rotational <span class="badge badge-primary badge-pill">112</span> </li>
+                </ul>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <h6>Question Type</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="Core" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Core
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="Rotational"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Rotational
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="qtype" value="all" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            All
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h6>Conditional</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="true" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            True
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="false" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            False
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ctype" value="all" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            All
+                        </label>
+                    </div>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Vessel Type</h6>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Chemical <input
+                                name="vessel" value="Chemical" type="checkbox"> <span class="check"></span> </label>
+                    </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LNG <input
+                                name="vessel" value="LNG" type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">LPG <input
+                                name="vessel" value="LPG" type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Oil <input
+                                name="vessel" value="Oil" type="checkbox"> <span class="check"></span> </label> </div>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
+                        <option selected value="Binary">Binary</option>
+                        <option value="Graduated">Graduated</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
+                        <option selected value="Graduated">Graduated</option>
+                        <option value="None">None</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="py-3">
+                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
+                        <option selected value="Graduated">Graduated</option>
+                        <option value="Binary">Binary</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    ROVIQ
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ROVIQ Categories</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-4">
+                <h6>Select required categories to filter</h6>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="roviq" value="all" id="flexCheckChecked" checked>
+                  <label class="form-check-label" for="flexCheckChecked">
+                    All
+                  </label>
+                </div>
+                {% for category in var1 %}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name= "roviq" value="{{category}}" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    {{category}}
+                  </label>
+                </div>
+                {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #008000;">Done</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div></div>
+                <br><br><button type="submit" class="btn btn-primary mt-2" name="filterbtn">Apply</button>
+            </form>
+        </section> <!-- Products Section -->
+        <section id="products" >
+            <div class="container py-3" id="section-to-print">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
+                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
+                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
+                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+            </div>
+            <div class="container py-3">
+              <form action="" method="post">
+                {% csrf_token %}
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                {% for q in viq7qs  %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-heading{{forloop.counter0}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{forloop.counter0}}" aria-expanded="false" aria-controls="flush-collapse{{forloop.counter0}}">
+                      {{q}}
+                    </button>
+                  </h2>
+                  <div id="flush-collapse{{forloop.counter0}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{forloop.counter0}}" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <p>
+                        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                          Check corresponding Sire Question
+                        </button>
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                          {{sireqn|index:forloop.counter0}}
+                        </div>
+                      </div>
+                      <br>
+                      <div class="reqs">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="{{uids|index:forloop.counter0}}" value="0" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            {{sireq1|index:forloop.counter0}}
+                          </label>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="{{uids|index:forloop.counter0}}" value="1" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            {{sireq2|index:forloop.counter0}}
+                          </label>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="{{uids|index:forloop.counter0}}" value="2" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            {{sireq3|index:forloop.counter0}}
+                          </label>
+                        </div>
+                        <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+          </form>
+            <button type="button" class="btn btn-secondary ml-2 prnt" style="background-color: #0d6efd;" onclick="printDiv()">Print</button>
+            <button type="submit" class="btn btn-primary mr-2" style="float: right;" name="qnbtn">Save Choices</button>
+            <br>
+            <nav aria-label="Page navigation example" class="my-4">
+              <ul class="pagination d-flex justify-content-center">
+                {% if viq7qs.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="/gapanalysis2/{{viq7qs.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+
+                {% for num in viq7qs.paginator.page_range %}
+                {% if viq7qs.number == num %}
+                <li class="page-item"><a class="page-link active" href="/gapanalysis2/{{num}}">{{num}}</a></li>
+                {% elif num > viq7qs.number|add:'-3' and  num < viq7qs.number|add:'3' %} 
+                <li class="page-item"><a class="page-link" href="/gapanalysis2/{{num}}">{{num}}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if viq7qs.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="/gapanalysis2/{{viq7qs.next_page_number}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+        </section>
+    </div>
+</div>
+{% endblock body %}

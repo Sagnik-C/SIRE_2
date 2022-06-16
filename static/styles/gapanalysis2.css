@@ -1,0 +1,30 @@
+body{
+    background: url("../images/l10.jfif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+     -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;   
+}
+
+.cover{
+    position: relative;
+    top: 80px;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.769);
+    width: 70vw;
+}
+/* #sidebar{
+    display: none;
+} */
+footer{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: oldlace;
+    position: relative;
+    margin-top: 50px;
+    bottom: -300px;
+    height: 50px;
+    width: 100%;
+}

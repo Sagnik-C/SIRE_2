@@ -16,4 +16,5 @@ urlpatterns = [
     path('ret404', views.ret404, name='ret404'),
     path('gapanalysis', views.gapanalysis, name='gapanalysis'),
     path('vesselinsp', views.vesselinsp, name='vesselinsp'),
+    path('gapanalysis2/<int:pageno>', views.gapanalysis2, name='gapanalysis2'),
 ]

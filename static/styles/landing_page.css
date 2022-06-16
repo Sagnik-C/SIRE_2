@@ -8,7 +8,10 @@ body{
 }
 .cover{
   position: relative;
-  top: 200px;
+  top: 120px;
+  margin-bottom: 300px;
+  display: flex;
+  justify-content: center;
 }
 .container{
     display: flex;

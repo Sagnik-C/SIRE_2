@@ -240,15 +240,17 @@ div.h6,h6{
     height: 132px;
     object-fit: contain;
 } */
+
 select{
-    width:15%;
+    width:85% !important;
 }
+
 .clear{
     clear: both;
 }
-.btn.btn-success{
+/* .btn.btn-success{
     visibility: hidden;
-}
+} */
 @media(min-width:992px){
     .filter,#mobile-filter{
         display: none;
@@ -317,17 +319,19 @@ select{
         clear: both;
     }
 }
+#section-to-print{
+    display: none;
+}
 
 @media print {
     body * {
-      visibility: hidden;
+        display: none;
     }
-    #section-to-print, #section-to-print * {
-      visibility: visible;
+
+    .products>#section-to-print, #section-to-print *{
+            display: block !important;
+            position: absolute;
+            left: 0;
+            top: 0;
     }
-    #section-to-print {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-  }
+}

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
+import pandas as pd
 
 # Create your views here.
 
@@ -115,6 +116,84 @@ def gapanalysis(request):
 
 def vesselinsp(request):
     return render(request, 'vesselinsp.html')
+
+#Pagination and rendering VIQ7 questions and SIRE 2.0 questions
+
+isset = 0
+
+def paginate(df2=None, pageno=1):
+    if df2 is None:
+        df2 = pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
+    viq7 = list(df2["VIQ7 questions"])
+    sireqn = list(df2["SIRE 2.0 questions"])
+    sireq1 = list(df2["Sire Requirement 1"])
+    sireq2 = list(df2["Sire Requirement 2"])
+    sireq3 = list(df2["Sire Requirement 3"])
+    uids = list(df2["UID"])
+    # viq7 = viq7
+    paginator1 = Paginator(viq7, 7)
+    paginator2 = Paginator(sireqn, 7)
+    paginator3 = Paginator(sireq1, 7)
+    paginator4 = Paginator(sireq2, 7)
+    paginator5 = Paginator(sireq3, 7)
+    paginator6 = Paginator(uids, 7)
+
+    # page = request.GET.get('page')
+    viq7 = paginator1.get_page(pageno)
+    sireqn = paginator2.get_page(pageno)
+    sireq1 = paginator3.get_page(pageno)
+    sireq2 = paginator4.get_page(pageno)
+    sireq3 = paginator5.get_page(pageno)
+    uids = paginator6.get_page(pageno)
+
+    return (viq7, sireqn, sireq1, sireq2, sireq3, uids)
+
+def gapanalysis2(request, pageno):
+    roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
+    
+    df = pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
+    global isset
+    #Handling Filter requests   
+
+    if 'filterbtn' in request.POST:
+        qtype = request.POST['qtype']
+        ctype = request.POST['ctype']
+        vessel = request.POST.getlist('vessel')
+        hardrestype = request.POST['hardrestype']
+        humanrestype = request.POST['humanrestype']
+        procrestype = request.POST['procrestype']
+        roviqlst = request.POST.getlist('roviq')
+        print(qtype, ctype, vessel, hardrestype, humanrestype, procrestype, roviqlst)
+        if qtype=='Core':
+            df = df.loc[df["Question Type"]=='Core']
+        if qtype=='Rotational':
+            df = df.loc[(df["Question Type"]=='Rotaional 1') | df["Question Type"]=='Rotational 2']
+        if ctype=='true':
+            df = df.loc[df["Conditional"]==True]
+        if ctype=='false':
+            df = df.loc[df["Conditional"]==False]
+        if len(vessel)!=0:
+            for v in vessel:
+                df = df.loc[df[v]==True]
+        if hardrestype != "all":
+            df = df.loc[df["Hardware Response Type"]==hardrestype]
+            
+        if humanrestype != "all":
+            df = df.loc[df["Human Response Type"]==humanrestype]
+            
+        if procrestype != "all":
+            df = df.loc[df["Process Response Type"]==procrestype]
+
+        if "all" not in roviqlst and len(roviqlst)!=0:
+            for cat in roviqlst:
+                df = df.loc[df["Roviq_"+cat]==True]
+    
+    viq7, sireqn, sireq1, sireq2, sireq3, uids = paginate(df ,pageno)
+
+    print(len(df))
+    
+    context = {"var1":roviq_categories, "viq7qs":viq7, "sireqn":sireqn, "sireq1":sireq1, "sireq2":sireq2, "sireq3":sireq3, "uids":uids}
+    return render(request, 'gapanalysis2.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):
