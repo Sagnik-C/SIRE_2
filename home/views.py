@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 import pandas as pd
-from home.models import filter
+from home.models import filter, gapAnalysis
+import json
 
 # Create your views here.
 
@@ -239,6 +240,32 @@ def gapanalysis2(request, pageno):
                     cuser.procrestype =   procrestype
                     cuser.roviqlst = roviqlst
                     cuser.save()
+            elif 'qnbtn' in request.POST:
+                userGA = gapAnalysis.objects.filter(username=request.session['user']).first()
+                postlst = dict()
+                lst = request.POST.lists()
+                for x in lst:
+                    if "uid" in x[0]:
+                        postlst[x[0]] = len(x[1])
+
+                if userGA is None:
+                    uid_dict = dict()
+                    for key in postlst:
+                        if "uid" in key:
+                            uid_dict[key] = int(postlst[key])
+                    uid_json = json.dumps(uid_dict)
+                    new_userGA = gapAnalysis(username=request.session['user'], uid_json=uid_json)
+                    new_userGA.save()
+                else:
+                    uid_json_old = userGA.uid_json
+                    uid_dict = json.loads(uid_json_old)
+                    for key in postlst:
+                        if "uid" in key:
+                            uid_dict[key] = int(postlst[key])
+                    uid_json = json.dumps(uid_dict)
+                    userGA.uid_json = uid_json
+                    userGA.save()
+                    
         
         print(len(df))
         viq7, sireqn, sireq1, sireq2, sireq3, uids = paginate(df ,pageno)
@@ -248,6 +275,16 @@ def gapanalysis2(request, pageno):
 
     else:
         return redirect('/ret404')
+
+# def handleGA(request, pageno):
+#     if 'user' in request.session:
+#         if request.method=='POST':
+#             uid_dict = dict()
+#             for idx in range(7):
+#                 uid_dict['uid_'+str(idx+pageno)] = len(request.POST['uid_'+idx])
+
+#     else:
+#         return redirect('/ret404')
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):

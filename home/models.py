@@ -1,5 +1,5 @@
 from django.db import models
-
+import jsonfield
 # Create your models here.
 class filter(models.Model):
     username = models.CharField(max_length=20, unique=True, primary_key=True)
@@ -12,4 +12,11 @@ class filter(models.Model):
     roviqlst = models.TextField(default="all")
 
     def __str__(self):
-        return self.username    
+        return self.username
+
+class gapAnalysis(models.Model):
+        username = models.CharField(max_length=20, unique=True, primary_key=True)
+        uid_json = jsonfield.JSONField()
+
+        def __str__(self):
+             return self.username
