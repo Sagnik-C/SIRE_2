@@ -1,4 +1,5 @@
 from email import message
+from operator import neg
 from django import http
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
@@ -125,30 +126,24 @@ isset = 0
 
 def paginate(df2=None, pageno=1):
     if df2 is None:
-        df2 = pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
+        df2 = pd.read_json('home/sire_viq.json')
     viq7 = list(df2["VIQ7 questions"])
     sireqn = list(df2["SIRE 2.0 questions"])
-    sireq1 = list(df2["Sire Requirement 1"])
-    sireq2 = list(df2["Sire Requirement 2"])
-    sireq3 = list(df2["Sire Requirement 3"])
+    negobs = list(df2["Potential Grounds for Neg Obs"])
     uids = list(df2["UID"])
     # viq7 = viq7
-    paginator1 = Paginator(viq7, 7)
-    paginator2 = Paginator(sireqn, 7)
-    paginator3 = Paginator(sireq1, 7)
-    paginator4 = Paginator(sireq2, 7)
-    paginator5 = Paginator(sireq3, 7)
-    paginator6 = Paginator(uids, 7)
+    paginator1 = Paginator(viq7, 5)
+    paginator2 = Paginator(sireqn, 5)
+    paginator3 = Paginator(negobs, 5)
+    paginator4 = Paginator(uids, 5)
 
     # page = request.GET.get('page')
     viq7 = paginator1.get_page(pageno)
     sireqn = paginator2.get_page(pageno)
-    sireq1 = paginator3.get_page(pageno)
-    sireq2 = paginator4.get_page(pageno)
-    sireq3 = paginator5.get_page(pageno)
-    uids = paginator6.get_page(pageno)
+    negobs = paginator3.get_page(pageno)
+    uids = paginator4.get_page(pageno)
 
-    return (viq7, sireqn, sireq1, sireq2, sireq3, uids)
+    return (viq7, sireqn, negobs, uids)
 
 def getData(df2, key_dict):
     qtype = key_dict['qtype']
@@ -190,7 +185,9 @@ def gapanalysis2(request, pageno):
         roviq_categories = ["Engine Control Room", "Compressor Room", "Interview - Security Officer", "Main Deck", "Interview Senior Officer", "Steering Gear", "Interview - Deck Rating", "Interview - Electrician / ETO", "Mooring Decks", "Interview - Engineer Officer", "Interview - Rating", "Interview - Deck Officer", "Cargo Control Room", "Bow Loading Area", "Chief Engineer's Office", "Lifeboat deck", "Engine Room", "Bridge", "Forecastle", "Emergency Headquarters.", "Internal Accommodation", "Interview - Galley Rating", "Documentation", "Pre-board", "Exterior Decks", "Approaching Vessel", "Interview - Engine Rating", "Cargo Manifold", "Pumproom", "Anywhere", "Aft Mooring Deck"]
 
         cuser = filter.objects.filter(username=request.session['user']).first()
-        df=pd.read_excel('home/sire_viq7_semantic_similarity.xlsx')
+        userGA = gapAnalysis.objects.filter(username=request.session['user']).first()
+        issaved="no"
+        df=pd.read_json('home/sire_viq.json')
         if request.method == "GET":
             if cuser is not None:
                 key_dict=dict()
@@ -210,6 +207,8 @@ def gapanalysis2(request, pageno):
                 else:
                     key_dict["roviqlst"] = (cuser.roviqlst).split(',')
                 df = getData(df, key_dict)
+                if userGA is not None:
+                    issaved = userGA.saved
         elif request.method == "POST":
             #Handling Filter requests   
             if 'filterbtn' in request.POST:
@@ -241,7 +240,6 @@ def gapanalysis2(request, pageno):
                     cuser.roviqlst = roviqlst
                     cuser.save()
             elif 'qnbtn' in request.POST:
-                userGA = gapAnalysis.objects.filter(username=request.session['user']).first()
                 postlst = dict()
                 lst = request.POST.lists()
                 for x in lst:
@@ -254,7 +252,7 @@ def gapanalysis2(request, pageno):
                         if "uid" in key:
                             uid_dict[key] = int(postlst[key])
                     uid_json = json.dumps(uid_dict)
-                    new_userGA = gapAnalysis(username=request.session['user'], uid_json=uid_json)
+                    new_userGA = gapAnalysis(username=request.session['user'], uid_json=uid_json, saved="yes")
                     new_userGA.save()
                 else:
                     uid_json_old = userGA.uid_json
@@ -268,23 +266,27 @@ def gapanalysis2(request, pageno):
                     
         
         print(len(df))
-        viq7, sireqn, sireq1, sireq2, sireq3, uids = paginate(df ,pageno)
+        viq7, sireqn, negobs, uids = paginate(df ,pageno)
         
-        context = {"var1":roviq_categories, "viq7qs":viq7, "sireqn":sireqn, "sireq1":sireq1, "sireq2":sireq2, "sireq3":sireq3, "uids":uids}
+        context = {"var1":roviq_categories, "viq7qs":viq7, "sireqn":sireqn, "negobs":negobs, "uids":uids}
         return render(request, 'gapanalysis2.html', context)
 
     else:
         return redirect('/ret404')
 
-# def handleGA(request, pageno):
-#     if 'user' in request.session:
-#         if request.method=='POST':
-#             uid_dict = dict()
-#             for idx in range(7):
-#                 uid_dict['uid_'+str(idx+pageno)] = len(request.POST['uid_'+idx])
-
-#     else:
-#         return redirect('/ret404')
+def reset_gafilter(request, pageno):
+    if 'user' in request.session:
+        cuser = filter.objects.filter(username=request.session['user']).first()
+        if cuser is not None:
+            cuser.qtype = "all"
+            cuser.ctype = "all"
+            cuser.vessel = "all"
+            cuser.hardrestype = "all"
+            cuser.humanrestype = "all"
+            cuser.procrestype = "all"
+            cuser.roviqlst = "all"
+            cuser.save()
+        return redirect(f'/gapanalysis2/{pageno}')
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):

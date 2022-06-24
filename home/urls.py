@@ -17,5 +17,5 @@ urlpatterns = [
     path('gapanalysis', views.gapanalysis, name='gapanalysis'),
     path('vesselinsp', views.vesselinsp, name='vesselinsp'),
     path('gapanalysis2/<int:pageno>', views.gapanalysis2, name='gapanalysis2'),
-    # path('handleGA/<int:pageno>', views.handleGA, name='handleGA'),
+    path('reset_gafilter/<int:pageno>', views.reset_gafilter, name='reset_gafilter'),
 ]

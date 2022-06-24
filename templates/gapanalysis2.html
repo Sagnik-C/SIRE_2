@@ -5,6 +5,9 @@
 {% block link %}
 <link rel="stylesheet" href={%static 'styles/filter.css'%}>
 <!-- <link rel="stylesheet" type="text/css" href="static/styles/print.css" media="print"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href={%static 'styles/gapanalysis2.css'%}>
 <script src={%static "scripts/show.js"%}></script>
 <script src={%static "scripts/filter.js"%}></script>
@@ -41,10 +44,14 @@
         <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Selected Filtre <span
                 class=" px-1 close">&times;</span> </div>
     </div>
-    <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse"
+    <div class="filters"> <button class="btn btn-success my-2" type="button" data-toggle="collapse"
             data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter" onclick="togglesidebar()">Filter<span
                 class="px-1 fas fa-filter"></span></button> </div>
+
+        
+
     <div id="mobile-filter">
+      <a href="/reset_gafilter/{{sireqn.number}}" style="text-decoration: None;"><img src= {%static "images/icons8-reset-30.png"%} alt="Reset">Filter Reset</a>
         <div class="py-3">
             <h6 class="font-weight-bold">Qustion Distribution</h6>
             <ul class="list-group">
@@ -144,6 +151,7 @@
                 </div>
         </form>
     </div>
+    <a href="/reset_gafilter/{{sireqn.number}}" style="text-decoration: None; color:black;"><img src= {%static "images/icons8-reset-30.png"%} alt="Reset">Filter Reset</a>
     <div class="content py-md-0 py-3">
         <section id="sidebar">
             <div class="py-3">
@@ -282,110 +290,121 @@
             </form>
         </section> <!-- Products Section -->
         <section id="products" >
+                <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #4681f4 !important;">
+            Instructions
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal2Label">Instruction Manual</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima ullam officia accusantium, ea iste commodi sapiente hic nisi facere! Aut eligendi fugit, mollitia ratione dolore voluptatibus similique enim odit, aperiam neque sunt eius voluptates dignissimos tempora ullam porro at pariatur accusamus cupiditate ut. Consequatur atque sit perferendis, non voluptatum dignissimos facilis unde, maiores quo eligendi consectetur voluptatibus ipsa, cupiditate veniam in tempora! Numquam dolore ea culpa officiis accusantium ipsum quibusdam sit sed, laudantium qui similique corporis porro quos nam enim velit reiciendis eligendi eaque ad delectus molestiae tempora exercitationem est? Sint ut optio itaque. Temporibus pariatur placeat perspiciatis provident rem aliquam, libero ipsa dolor autem, similique, repellat possimus molestiae ducimus quia velit. Minus fugit animi tempora sunt delectus modi dolorum incidunt alias at ut natus accusantium reiciendis, itaque labore, pariatur voluptas cum tempore eum ad impedit quisquam esse maiores. Soluta hic fugit blanditiis quae, cupiditate sequi modi numquam neque exercitationem qui eaque natus incidunt! Saepe ipsam veritatis atque ducimus dolorum non, porro, fuga voluptates, officia magnam quibusdam doloremque facilis corrupti blanditiis. Veritatis, labore rem. Eligendi, quisquam? Aliquid cupiditate laborum incidunt. Harum et doloribus ab assumenda? Ad facere harum non, distinctio nihil neque adipisci veniam nemo, repellendus maxime veritatis, alias odio.
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="container py-3" id="section-to-print">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo temporibus autem ullam? Fugiat
-                    laudantium temporibus officia natus voluptas expedita rerum amet ex, eligendi quod ullam placeat
-                    tenetur itaque repudiandae quibusdam quidem eos excepturi, voluptate quam nam at ratione molestiae
-                    ipsa. Odit sapiente facilis eveniet, laudantium qui sit et eum iure.</p>
+              {% for q in sireqn  %}
+              {% with forloop.counter0 as  outercounter%}
+              <b>SIRE 2.0 Question</b>
+              {{outercounter}}:{{q}}<br><br>
+              <b>Potential Grounds for Negative Observation</b>
+              {% for obs in negobs|index:outercounter %}
+              
+                <p>{{forloop.counter}}: {{obs}}</p>
+              {% endfor %}
+              {% endwith %}
+              {% endfor %}
             </div>
             <div class="container py-3">
-              <form action="/gapanalysis2/{{viq7qs.number}}" method="post">
+              <form action="/gapanalysis2/{{sireqn.number}}" method="post">
                 {% csrf_token %}
               <div class="accordion accordion-flush" id="accordionFlushExample">
-                {% for q in viq7qs  %}
+                {% for q in sireqn  %}
+                {% with forloop.counter0 as  outercounter%}
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="flush-heading{{forloop.counter0}}">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{forloop.counter0}}" aria-expanded="false" aria-controls="flush-collapse{{forloop.counter0}}">
-                      {{q}}
+                      {{q}} 
                     </button>
                   </h2>
                   <div id="flush-collapse{{forloop.counter0}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{forloop.counter0}}" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
+                      {% comment %} <div style="position:relative;left:10px;color:green;font-weight:20px;float:right;">Saved</div> {% endcomment %}
+                      {% comment %} {% if issaved == "yes" %}<button type="button" class="btn btn-outline-success btn-sm" style="float:right;">Saved</button>{% endif %} {% endcomment %}
                       <p>
                         <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                          Check corresponding Sire Question
+                          Check corresponding VIQ 7 Questions
                         </button>
                       </p>
                       <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                          {{sireqn|index:forloop.counter0}}
+                          {% for vqn in viq7qs|index:outercounter %}
+                          {{vqn}}<br>
+                          {% endfor %}
+                          {% comment %} {{sireqn|index:forloop.counter0}} {% endcomment %}
                         </div>
                       </div>
                       <br>
+                      
                       <div class="reqs">
+                        <h3><b>Potential Grounds for Negative Observation:</b></h3><br>
+                        {% for obs in negobs|index:outercounter %}
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:forloop.counter0}}" value="0" id="flexCheckDefault">
+                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:outercounter}}" value="0" id="flexCheckDefault">
                           <label class="form-check-label" for="flexCheckDefault">
-                            {{sireq1|index:forloop.counter0}}
+                            {{obs}}
                           </label>
                         </div>
-                        <br>
+                        <br> 
+                        {% endfor %}
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:forloop.counter0}}" value="1" id="flexCheckDefault">
+                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:outercounter}}" value="0" id="flexCheckDefault">
                           <label class="form-check-label" for="flexCheckDefault">
-                            {{sireq2|index:forloop.counter0}}
+                            The vessel is in compliance with the SIRE 2.0 question. None of the above observations are found.
                           </label>
                         </div>
-                        <br>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:forloop.counter0}}" value="2" id="flexCheckDefault">
-                          <label class="form-check-label" for="flexCheckDefault">
-                            {{sireq3|index:forloop.counter0}}
-                          </label>
-                        </div>
-                        <br>
                       </div>
                     </div>
                   </div>
                 </div>
                 <br>
+                {% endwith %}
                 {% endfor %}
             </div>
             <button type="submit" class="btn btn-primary mr-2" style="float: right;" name="qnbtn">Save Choices</button>
           </form>
-            <button type="button" class="btn btn-secondary ml-2 prnt" style="background-color: #0d6efd;" onclick="printDiv()">Print</button>
+            <button type="button" class="btn btn-secondary ml-2 prnt" style="background-color: #4681f4 !important;" onclick="printDiv()">Print</button>
 
             <br>
             <nav aria-label="Page navigation example" class="my-4">
               <ul class="pagination d-flex justify-content-center">
-                {% if viq7qs.has_previous %}
+                {% if sireqn.has_previous %}
                 <li class="page-item">
-                  <a class="page-link" href="/gapanalysis2/{{viq7qs.previous_page_number}}" aria-label="Previous">
+                  <a class="page-link" href="/gapanalysis2/{{sireqn.previous_page_number}}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
                 {% endif %}
 
-                {% for num in viq7qs.paginator.page_range %}
-                {% if viq7qs.number == num %}
+                {% for num in sireqn.paginator.page_range %}
+                {% if sireqn.number == num %}
                 <li class="page-item"><a class="page-link active" href="/gapanalysis2/{{num}}">{{num}}</a></li>
-                {% elif num > viq7qs.number|add:'-3' and  num < viq7qs.number|add:'3' %} 
+                {% elif num > sireqn.number|add:'-3' and  num < sireqn.number|add:'3' %} 
                 <li class="page-item"><a class="page-link" href="/gapanalysis2/{{num}}">{{num}}</a></li>
                 {% endif %}
                 {% endfor %}
-                {% if viq7qs.has_next %}
+                {% if sireqn.has_next %}
                 <li class="page-item">
-                  <a class="page-link" href="/gapanalysis2/{{viq7qs.next_page_number}}" aria-label="Next">
+                  <a class="page-link" href="/gapanalysis2/{{sireqn.next_page_number}}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>

@@ -17,6 +17,7 @@ class filter(models.Model):
 class gapAnalysis(models.Model):
         username = models.CharField(max_length=20, unique=True, primary_key=True)
         uid_json = jsonfield.JSONField()
+        saved = models.CharField(max_length=50, default="no")
 
         def __str__(self):
              return self.username

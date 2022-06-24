@@ -12,11 +12,13 @@ body{
     top: 80px;
     border-radius: 40px;
     background-color: rgba(255, 255, 255, 0.769);
-    width: 70vw;
+    width: 75vw;
 }
 /* #sidebar{
     display: none;
 } */
+
+
 footer{
     display: flex;
     justify-content: center;
@@ -27,4 +29,28 @@ footer{
     bottom: -300px;
     height: 50px;
     width: 100%;
+}
+
+.accordion *{
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    word-spacing: 2px;
+}
+.accordion-header button{
+    word-spacing: 3px;
+}
+#accordionFlushExample .accordion-item {
+    /* font-size: 0.5em; */
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    border-radius: 14px;
+    box-shadow: gray 0 2px 3px 0;
+}
+#accordionFlushExample .accordion-item:hover {
+    /* font-size: 0.5em; */
+    position: relative;
+    transform: translateY(-2px);
+    box-shadow: rgb(86, 85, 85) 0 3px 4px 0;
 }
