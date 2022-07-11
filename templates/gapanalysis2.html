@@ -55,9 +55,11 @@
         <div class="py-3">
             <h6 class="font-weight-bold">Qustion Distribution</h6>
             <ul class="list-group">
+              <span class="hovertext" data-hover="Minimum Questions required to meet the fundamental risk assessment criteria, as defined by the OCIMF bowtie risk assessment process.">  
                 <li
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
                     Core <span class="badge badge-primary badge-pill">328</span> </li>
+                    <span class="hovertext" data-hover="A non-core question assigned to a vessel on an ocassional basis.">
                 <li
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
                     Rotational <span class="badge badge-primary badge-pill">112</span> </li>
@@ -70,14 +72,16 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="qtype" value="core" id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">
-                        Core
+                      <span class="hovertext" data-hover="Minimum Questions required to meet the fundamental risk assessment criteria, as defined by the OCIMF bowtie risk assessment process.">
+                        Core</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="qtype" value="rotational"
                         id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">
-                        Rotational
+                      <span class="hovertext" data-hover="A non-core question assigned to a vessel on an ocassional basis.">
+                        Rotational</span>
                     </label>
                 </div>
                 <div class="form-check">
@@ -126,7 +130,8 @@
                 </div>
             </div>
             <div class="py-3">
-                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover="The deficient vessel structure, machinery, outfitting or equipment identified 
+                      through the standard classification coding.">Hardware Response Type</span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
                         <option selected value="binary">Binary</option>
                         <option value="graduated">Graduated</option>
@@ -134,7 +139,7 @@
                     </select>
                 </div>
                 <div class="py-3">
-                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover="The rank grouping of the Observed Person (OP) or Responsible Team (RT).">Human Response Type</span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
                         <option selected value="binary">Binary</option>
                         <option value="graduated">Graduated</option>
@@ -142,7 +147,10 @@
                     </select>
                 </div>
                 <div class="py-3">
-                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover=" The deficient procedure and/or document identified through the TMSA-based 
+                      classification coding.">
+                      Process Response Type
+                    </span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
                         <option selected value="binary">Binary</option>
                         <option value="graduated">Graduated</option>
@@ -157,12 +165,17 @@
             <div class="py-3">
                 <h6 class="font-weight-bold">Categories</h6>
                 <ul class="list-group">
+                  <span class="hovertext" data-hover="Minimum Questions required to meet the fundamental risk assessment criteria, as defined by the OCIMF bowtie risk assessment process.">
                     <li
                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
                         Core <span class="badge badge-primary badge-pill">328</span> </li>
+                      </span>
+
+                      <span class="hovertext" data-hover="A non-core question assigned to a vessel on an ocassional basis.">
                     <li
                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
                         Rotational <span class="badge badge-primary badge-pill">112</span> </li>
+                      </span>
                 </ul>
             </div>
             <form method="post">
@@ -225,7 +238,10 @@
                                 name="vessel" value="Oil" type="checkbox"> <span class="check"></span> </label> </div>
                 </div>
                 <div class="py-3">
-                    <h6 class="font-weight-bold">Hardware Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover="The deficient vessel structure, machinery, outfitting or equipment identified 
+                      through the standard classification coding.">
+                      Hardware Response Type
+                    </span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="hardrestype">
                         <option selected value="Binary">Binary</option>
                         <option value="Graduated">Graduated</option>
@@ -233,7 +249,9 @@
                     </select>
                 </div>
                 <div class="py-3">
-                    <h6 class="font-weight-bold">Human Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover="The rank grouping of the Observed Person (OP) or Responsible Team (RT).">
+                      Human Response Type
+                    </span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="humanrestype">
                         <option selected value="Graduated">Graduated</option>
                         <option value="None">None</option>
@@ -241,7 +259,10 @@
                     </select>
                 </div>
                 <div class="py-3">
-                    <h6 class="font-weight-bold">Process Response Type</h6>
+                    <h6 class="font-weight-bold"><span class="hovertext" data-hover=" The deficient procedure and/or document identified through the TMSA-based 
+                      classification coding.">
+                      Process Response Type
+                    </span></h6>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="procrestype">
                         <option selected value="Graduated">Graduated</option>
                         <option value="Binary">Binary</option>
@@ -250,7 +271,9 @@
                 </div>
                 <!-- Button trigger modal -->
 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <span class="hovertext" data-hover="The CVIQ grouped and reordered into the normal inspection locations and route taken during a vessel inspection">
     ROVIQ
+  </span>
   </button>
   
   <!-- Modal -->
@@ -292,7 +315,9 @@
         <section id="products" >
                 <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #4681f4 !important;">
-            Instructions
+            <span class="hovertext_intro" data-hover="Click if you're new here!">
+              Instructions
+            </span>
           </button>
 
           <!-- Modal -->
@@ -304,7 +329,29 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima ullam officia accusantium, ea iste commodi sapiente hic nisi facere! Aut eligendi fugit, mollitia ratione dolore voluptatibus similique enim odit, aperiam neque sunt eius voluptates dignissimos tempora ullam porro at pariatur accusamus cupiditate ut. Consequatur atque sit perferendis, non voluptatum dignissimos facilis unde, maiores quo eligendi consectetur voluptatibus ipsa, cupiditate veniam in tempora! Numquam dolore ea culpa officiis accusantium ipsum quibusdam sit sed, laudantium qui similique corporis porro quos nam enim velit reiciendis eligendi eaque ad delectus molestiae tempora exercitationem est? Sint ut optio itaque. Temporibus pariatur placeat perspiciatis provident rem aliquam, libero ipsa dolor autem, similique, repellat possimus molestiae ducimus quia velit. Minus fugit animi tempora sunt delectus modi dolorum incidunt alias at ut natus accusantium reiciendis, itaque labore, pariatur voluptas cum tempore eum ad impedit quisquam esse maiores. Soluta hic fugit blanditiis quae, cupiditate sequi modi numquam neque exercitationem qui eaque natus incidunt! Saepe ipsam veritatis atque ducimus dolorum non, porro, fuga voluptates, officia magnam quibusdam doloremque facilis corrupti blanditiis. Veritatis, labore rem. Eligendi, quisquam? Aliquid cupiditate laborum incidunt. Harum et doloribus ab assumenda? Ad facere harum non, distinctio nihil neque adipisci veniam nemo, repellendus maxime veritatis, alias odio.
+                  You are now accessing the <b><i>Gap Analysis Module</i></b>. Please follow the below mentioned steps to proceed. 
+                  <br> <br>
+                  1. Click on the green Filter Tab to toggle it on or off. Once <b>Filter</b> tab is on, you shall be able to view a list of filters.
+                  <br> <br>
+                  2. Select <b>"Question Type", "Conditional", "Vessel Type", "Hardware Response Type", "Human Response Type", "Process Response Type"</b>. 
+                     Upon clicking on the <b>ROVIQ</b> tab, a small pop shall appear on your web page wherein you will be able to view the ROVIQ categories. 
+                     Select filters as per your requirements and click on <b>Apply</b>.
+                  <br> <br>
+                  3. You will now see a list of SIRE 2.0 Questions. Upon clicking on a perticular question, you can view the corresponding VIQ7 question.
+                     This is follwed by a list of <b>'Potential Grounds for Negative Observations'</b> checklist. Check the boxes as per the informationed gained. 
+                     <br> <br>
+                     "Hardware Response Type", "Human Response Type", "Process Response Type" filters require you to choose between binary, graduated, all. <br>Hover over <span class="hovertext" data-hover=" A contextualised pair of responses which equate to a simple YES or NO 
+                      response to a CVIQ question"> <b>Binary</b></span>, <span class="hovertext" data-hover=" A response to a CVIQ question that is not a simple yes or no but is graded."> <b>Graduated</b></span> to see what they mean.
+                  <br> <br>
+                  4. After completing the Inspection, click on the <b> Submit </b> button to proceed.
+                  <br> <br>
+                  <b><i># Hover over each section to get an overview.
+                    <br> <br>
+                    # Click on the <b> Save Choices</b> button to avoid losing your progress the next time you return.
+                    <br> <br>
+                    # Click on the <b> Print </b> button to print your progress so far.
+                    <br> <br>
+                  </i></b>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -359,7 +406,7 @@
                         <h3><b>Potential Grounds for Negative Observation:</b></h3><br>
                         {% for obs in negobs|index:outercounter %}
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:outercounter}}" value="0" id="flexCheckDefault">
+                          <input class="form-check-input" type="checkbox" name="{{uids|index:outercounter}}" value="{{forloop.counter0}}" id="flexCheckDefault">
                           <label class="form-check-label" for="flexCheckDefault">
                             {{obs}}
                           </label>
@@ -367,7 +414,7 @@
                         <br> 
                         {% endfor %}
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="uid_{{uids|index:outercounter}}" value="0" id="flexCheckDefault">
+                          <input class="form-check-input" type="checkbox" name="{{uids|index:outercounter}}" value="g2g" id="flexCheckDefault">
                           <label class="form-check-label" for="flexCheckDefault">
                             The vessel is in compliance with the SIRE 2.0 question. None of the above observations are found.
                           </label>
@@ -380,12 +427,13 @@
                 {% endwith %}
                 {% endfor %}
             </div>
-            <button type="submit" class="btn btn-primary mr-2" style="float: right;" name="qnbtn">Save Choices</button>
+            <button type="submit" class="btn btn-primary mr-2 mt-2" style="float: right;" name="qnbtn">Save Choices</button>
           </form>
-            <button type="button" class="btn btn-secondary ml-2 prnt" style="background-color: #4681f4 !important;" onclick="printDiv()">Print</button>
+          <button type="button" class="btn btn-secondary ml-2 mt-2 prnt" style="background-color: #4681f4 !important;" onclick="printDiv()">Print</button>
+          <a href="/analyse/{{sireqn.number}}"><button type="button" class="btn btn-secondary mt-2 analyse" style="background-color: #4681f4 !important;" >Check Analysis</button></a>
 
             <br>
-            <nav aria-label="Page navigation example" class="my-4">
+            <nav aria-label="Page navigation example" class="my-4 pagenav">
               <ul class="pagination d-flex justify-content-center">
                 {% if sireqn.has_previous %}
                 <li class="page-item">

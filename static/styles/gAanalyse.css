@@ -1,0 +1,42 @@
+body{
+    background: url("../images/l10.jfif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+     -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.enc{
+    position: relative;
+    top:50px;
+    width: 80vw;
+    position: relative;
+    left: 10vw;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 20px;
+    background-color: rgba(255, 255, 255, 0.769);
+    border-radius: 50px;
+}
+
+.enc h2{
+    margin: 25px 10px;
+}
+canvas{
+    display: block;
+}
+.sec{
+    height: 50vh;
+    width:35vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+footer{
+    position: relative;
+    top: 150px;
+}

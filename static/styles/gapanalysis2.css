@@ -54,3 +54,66 @@ footer{
     transform: translateY(-2px);
     box-shadow: rgb(86, 85, 85) 0 3px 4px 0;
 }
+
+.analyse{
+    position: relative;
+    left: 31%;
+}
+.pagenav{
+    position: relative;
+    top: 65px;
+}
+
+.hovertext {
+    position: relative;
+  }
+  
+  .hovertext:before {
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: 140px;
+    background-color: rgb(214, 236, 203);
+    color: black;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+    transition: opacity 0.5s ease-in-out;
+  
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 110%;
+  }
+  
+  .hovertext:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+.hovertext_intro {
+    position: relative;
+  }
+  
+  .hovertext_intro:before {
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: 140px;
+    background-color: rgb(241, 212, 178);
+    color: black;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+    transition: opacity 0.5s ease-in-out;
+  
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 110%;
+  }
+  
+  .hovertext_intro:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }

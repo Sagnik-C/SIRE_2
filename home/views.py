@@ -243,8 +243,12 @@ def gapanalysis2(request, pageno):
                 postlst = dict()
                 lst = request.POST.lists()
                 for x in lst:
+
                     if "uid" in x[0]:
-                        postlst[x[0]] = len(x[1])
+                        if 'g2g' not in x[1]:
+                            postlst[x[0]] = len(x[1])
+                        else:
+                            postlst[x[0]] = 0
 
                 if userGA is None:
                     uid_dict = dict()
@@ -287,6 +291,41 @@ def reset_gafilter(request, pageno):
             cuser.roviqlst = "all"
             cuser.save()
         return redirect(f'/gapanalysis2/{pageno}')
+
+
+def analyse(request, pageno):
+    if 'user' in request.session:
+        cuser = gapAnalysis.objects.filter(username=request.session['user']).first()
+        uids = json.loads(cuser.uid_json)
+        print(uids)
+
+        if request.method=="GET":
+            if "backbtn" in request.GET:
+                return redirect(f'/gapanalysis2/{pageno}')
+            else:
+                data = pd.read_json('home/sire_viq.json', orient='columns')
+                coreqns = list((data.loc[data["Question Type"]=="Core"])["UID"])
+                rotationqns = list((data.loc[(data["Question Type"]=="Rotational 1") | (data["Question Type"]=="Rotational 2")])["UID"])
+                humanresqns = list((data.loc[data["Human Related Questions"]==True])["UID"])
+                hardresqns = list((data.loc[data["Hardware Questions"]==True])["UID"])
+                procresqns = list((data.loc[data["Process Questions"]==True])["UID"])
+                core_sat, rot_sat, humanres_sat, hardres_sat, procres_sat, sire_sat = 0, 0, 0, 0, 0, 0
+                total_coreqns = len(coreqns)
+                total_rotationqns = len(rotationqns)
+                for uid in uids:
+                    sire_sat+=1
+                    if uid in coreqns:
+                        core_sat+=1
+                    if uid in rotationqns:
+                        rot_sat+=1
+                    if uid in humanresqns:
+                        humanres_sat+=1
+                    if uid in hardresqns:
+                        hardres_sat+=1
+                    if uid in procresqns:
+                        procres_sat+=1
+                context = {"core_sat":round((core_sat/total_coreqns)*100, 3), "rot_sat":round((rot_sat/total_rotationqns)*100, 3), "humanres_sat":round(humanres_sat/241, 3), "hardres_sat":round(hardres_sat/241, 3), "procres_sat":round(procres_sat/241, 3), "tot":100,"sire_sat":round(sire_sat/len(data)*100, 3)}
+                return render (request, 'gAanalyse.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):

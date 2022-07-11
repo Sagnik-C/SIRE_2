@@ -18,4 +18,5 @@ urlpatterns = [
     path('vesselinsp', views.vesselinsp, name='vesselinsp'),
     path('gapanalysis2/<int:pageno>', views.gapanalysis2, name='gapanalysis2'),
     path('reset_gafilter/<int:pageno>', views.reset_gafilter, name='reset_gafilter'),
+    path('analyse/<int:pageno>', views.analyse, name='analyse'),
 ]
