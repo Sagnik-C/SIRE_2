@@ -330,7 +330,8 @@ def analyse(request, pageno):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def handlelogout(request):
     fiter_users = filter.objects.filter(username=request.session['user']).first()
-    fiter_users.delete()
+    if fiter_users is not None: 
+        fiter_users.delete()
     del request.session['user']
     logout(request)        
 
